@@ -1,4 +1,9 @@
 const tmi = require("tmi.js");
+const app = require('express')();
+const http = require('http').Server(app);
+const request = require('request');
+const io = require('socket.io')(http);
+
 
 // Define configuration options
 const opts = {
@@ -15,6 +20,10 @@ const client = new tmi.client(opts);
 // Register our event handlers (defined below)
 client.on("message", onMessageHandler);
 client.on("connected", onConnectedHandler);
+io.on('connection', (socket) => {
+    io.emit('connected', 'user connected');
+});
+
 
 // Connect to Twitch:
 client.connect();
@@ -30,44 +39,28 @@ function onMessageHandler(target, context, msg, self) {
 
   // If the command is known, let's execute it
   if (commandName === "!up") {
-    const num = rollDice(commandName);
-    client.say(
-      target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
-    );
     console.log(`* Executed ${commandName} command`);
   } else if (commandName === "!down") {
-    const num = rollDice(commandName);
-    client.say(
-      target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
-    );
     console.log(`* Executed ${commandName} command`);
   } else if (commandName === "!left") {
-    const num = rollDice(commandName);
-    client.say(
-      target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
-    );
     console.log(`* Executed ${commandName} command`);
   } else if (commandName === "!right") {
-    const num = rollDice(commandName);
-    client.say(
-      target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
-    );
     console.log(`* Executed ${commandName} command`);
   } else if (commandName === "!d20") {
     const num = rollDice(commandName);
     client.say(
       target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
+      `You rolled a ${num}`
     );
     console.log(`* Executed ${commandName} command`);
   } else {
     console.log(`* Unknown command ${commandName}`);
   }
 }
+
+http.listen(3000, () => {
+  console.log('listening on *:3000');
+});
 
 // Function called when the "dice" command is issued
 function rollDice() {
