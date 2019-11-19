@@ -29,43 +29,35 @@ function onMessageHandler(target, context, msg, self) {
   const commandName = msg.trim();
 
   // If the command is known, let's execute it
-  if (commandName === "!d20") {
+  if (commandName === "!up") {
     const num = rollDice(commandName);
     client.say(
       target,
       `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
     );
     console.log(`* Executed ${commandName} command`);
-  } else {
-    console.log(`* Unknown command ${commandName}`);
-  }
-
-
-  if (commandName === "!d20") {
+  } else if (commandName === "!down") {
     const num = rollDice(commandName);
     client.say(
       target,
       `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
     );
     console.log(`* Executed ${commandName} command`);
-  } else {
-    console.log(`* Unknown command ${commandName}`);
-  }
-
-
-  if (commandName === "!d20") {
+  } else if (commandName === "!left") {
     const num = rollDice(commandName);
     client.say(
       target,
       `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
     );
     console.log(`* Executed ${commandName} command`);
-  } else {
-    console.log(`* Unknown command ${commandName}`);
-  }
-
-
-  if (commandName === "!d20") {
+  } else if (commandName === "!right") {
+    const num = rollDice(commandName);
+    client.say(
+      target,
+      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
+    );
+    console.log(`* Executed ${commandName} command`);
+  } else if (commandName === "!d20") {
     const num = rollDice(commandName);
     client.say(
       target,
