@@ -1,16 +1,16 @@
-const tmi = require("tmi.js");
-const WebSocket = require("ws");
+const tmi = require('tmi.js');
+const WebSocket = require('ws');
 
 let wsClient, wsReq;
 
 const server = new WebSocket.Server({ port: 3000 });
 
 async function waitForConnection() {
-  await server.on("connection", (client, req) => {
+  await server.on('connection', (client, req) => {
     wsClient = client;
     wsReq = req;
 
-    console.log("CONNECTED to client");
+    console.log('Client connected');
   });
 }
 
@@ -27,8 +27,8 @@ const opts = {
 const client = new tmi.client(opts);
 
 // Register our event handlers (defined below)
-client.on("message", onMessageHandler);
-client.on("connected", onConnectedHandler);
+client.on('message', onMessageHandler);
+client.on('connected', onConnectedHandler);
 
 // Connect to Twitch:
 client.connect();
@@ -43,8 +43,8 @@ function onMessageHandler(target, context, msg, self) {
   const commandName = msg.trim();
 
   // If the command is known, let's execute it
-  if (commandName === "!up") {
-    wsClient.send("up");
+  if (commandName === '!up') {
+    wsClient.send('up');
 
     console.log(`* Executed ${commandName} command`);
   } else if (commandName === "!down") {
